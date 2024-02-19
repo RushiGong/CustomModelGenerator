@@ -61,7 +61,7 @@
                 <attribute name="type">
                     <choice>
                         <value>UQCG</value>
-                        <a:documentation>Gibbs energy of a specie</a:documentation>
+                        <a:documentation>Gibbs energy</a:documentation>
                         <value>UQCT</value>
                         <a:documentation>Tau function in residual contribution of excess Gibbs energy</a:documentation>
                         <value>UQCQ</value>
@@ -69,7 +69,7 @@
                         <value>UQCR</value>
                         <a:documentation>Volume paramter</a:documentation>
                         <value>UQCZ</value>
-                        <a:documentation>Coordination number of a constituent</a:documentation>
+                        <a:documentation>Coordination number</a:documentation>
                     </choice>
                 </attribute>
                 <interleave>
