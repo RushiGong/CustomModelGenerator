@@ -1,0 +1,46 @@
+model:
+  name: NewModel
+  energy_contributions:
+    ref: reference_energy
+    idmix: ideal_mixing_energy
+    xsmix: excess_mixing_energy
+  basic_functions:
+    - default
+    - _toop_filter
+  parameters_functions:
+    - parameter: v_i
+      attributes: "i: v.Species"
+      database_keyword: NewModelV
+      comments: volume parameter
+    - parameter: z
+      attributes: null
+      database_keyword: NewModelZ
+      comments: coordination number
+    - parameter: b_ij
+      attributes:
+        - "i: v.Species"
+        - "j: v.Species"
+      database_keyword: NewModelB
+      comments: null
+  energy_functions:
+    - energy: reference_energy
+      function: CEF-default
+      comments: null
+    - energy: ideal_mixing_energy
+      function: CEF-default
+      comments: null
+    - energy: excess_mixing_energy
+      function: null
+      comments: G=A+BT
+
+database:
+  name: NewModel
+  description: This is new model
+  parameters:
+    UQCG: Gibbs energy
+    UQCT: Tau function in residual contribution of excess Gibbs energy
+  options:
+   - Exponents
+   - Order
+
+

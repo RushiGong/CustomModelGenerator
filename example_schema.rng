@@ -34,7 +34,7 @@
     <define name="NewModel.model" combine="choice">
         <element name="Model">
             <attribute name="type">
-                <a:documentation>This is the New Model</a:documentation>
+                <a:documentation>This is new model</a:documentation>
                 <value>NewModel</value>
             </attribute>
             <interleave>
@@ -64,12 +64,6 @@
                         <a:documentation>Gibbs energy</a:documentation>
                         <value>UQCT</value>
                         <a:documentation>Tau function in residual contribution of excess Gibbs energy</a:documentation>
-                        <value>UQCQ</value>
-                        <a:documentation>Surface-area paramter</a:documentation>
-                        <value>UQCR</value>
-                        <a:documentation>Volume paramter</a:documentation>
-                        <value>UQCZ</value>
-                        <a:documentation>Coordination number</a:documentation>
                     </choice>
                 </attribute>
                 <interleave>
