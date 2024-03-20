@@ -4,9 +4,7 @@ model:
     ref: reference_energy
     idmix: ideal_mixing_energy
     xsmix: excess_mixing_energy
-  basic_functions:
-    - default
-    - _toop_filter
+  basic_functions: default
   parameters_functions:
     - parameter: v_i
       attributes: "i: v.Species"
@@ -37,8 +35,8 @@ database:
   name: NewModel
   description: This is new model
   parameters:
-    UQCG: Gibbs energy
-    UQCT: Tau function in residual contribution of excess Gibbs energy
+    NewModelV: volume parameter
+    NewModelZ: coordination number
   options:
    - Exponents
    - Order
