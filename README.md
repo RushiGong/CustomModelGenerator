@@ -41,12 +41,13 @@ All of the possible keys are
       parameters
       options
 ```
-### model
+
+## model
 The ```model``` key is intended to define the thermodynamic model you want to implement
 ### name
+The name of the thermodynamic model.
 
-*type:* string
-
+*type:* string<br>
 *default:* required
 
-The name of the thermodynamic model.
+
