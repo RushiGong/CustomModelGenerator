@@ -47,7 +47,17 @@ The ```model``` key is intended to define the thermodynamic model you want to im
 ### name
 The name of the thermodynamic model.
 
-*type:* string<br>
-*default:* required
+*type:* string
 
+### energy_contributions
+The ```energy_contributions``` keyword is intended to define what contributions to Gibbs energy are considered in the thermodynamic model
+
+*type:* ```key:value``` pair<br>
+```key``` could be the short name and ```value``` is the full name for the ```energy_function```
+
+### basic_functions
+Define some functions you would like to extract from existing models in pycalphad to use in the custom model.
+
+*type:* list<br>
+*default:* The minimum functions should be loaded from  **[`template_functions.json`](./template_functions.json)**
 
