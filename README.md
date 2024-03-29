@@ -3,11 +3,11 @@
 This **template generator** can help you create the templates to implement your custom thermodynamic model into [pycalphad](https://pycalphad.org/docs/latest/).
 
 ## How to start
-1. Use the **[`Custom_Model_Database_Generator.ipynb`](./Custom_Model_Database_Generator.ipynb)** to create an  XML schema template for defining the thermodynamic database for your custom model.
-2. Use the **[`Custom_Model_Template_Generator.ipynb`](./Custom_Model_Template_Generator.ipynb)** to create a PyCalphad-style model template for expressing your custom model in PyCalphad.
+1. Use the **[`Custom_Model_Database_Generator.ipynb`](./example/Custom_Model_Database_Generator.ipynb)** to create an  XML schema template for defining the thermodynamic database for your custom model.
+2. Use the **[`Custom_Model_Template_Generator.ipynb`](./example/Custom_Model_Template_Generator.ipynb)** to create a PyCalphad-style model template for expressing your custom model in PyCalphad.
 
 ## Prepare configuration yaml file
-See  **[`CustomModel.yaml`](./CustomModel.yaml)** for an example.
+See  **[`CustomModel.yaml`](./example/CustomModel.yaml)** for an example.
 
 These are all key value pairs in the format:
 ```yaml
@@ -56,10 +56,10 @@ The ```energy_contributions``` keyword is intended to define what contributions 
 ```key``` could be the short name and ```value``` is the full name for the ```energy_function```.
 
 ### basic_functions
-Define some functions you would like to extract from existing models in pycalphad to use in the custom model. See **[`template_functions.json`](./template_functions.json)** for all available functions.
+Define some functions you would like to extract from existing models in pycalphad to use in the custom model. See **[`template_functions.json`](./cmgen/template_functions.json)** for all available functions.
 
 *type:* list<br>
-*default:* The minimum functions should be loaded from  **[`template_functions.json`](./template_functions.json)**.
+*default:* The minimum functions should be loaded from  **[`template_functions.json`](./cmgen/template_functions.json)**.
 
 ### parameters_functions
 The ```parameters_functions``` is intended to define the functions for new parameters in the custom model, you could provide information including parameter name, attributes, corresponding keyword defined in the database, and other comments for the parameter. 
