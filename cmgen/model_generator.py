@@ -1,4 +1,6 @@
 import yaml
+import os
+import json
 
 def custom_model(model_name, contributions, basic_functions, parameter_functions, energy_functions):
     # Create the class definition as a string
@@ -24,7 +26,7 @@ def custom_model(model_name, contributions, basic_functions, parameter_functions
 
 def yaml_to_basic_functions_strings(setting):
     function_strings = []
-    template_file=open('template_functions.json')
+    template_file=open('../cmgen/template_functions.json') ##To do: need to be more general.
     template_functions=json.load(template_file)
     for key in setting['model']['basic_functions']:
         if key == 'none':
@@ -65,7 +67,7 @@ def yaml_to_parameter_functions_strings(setting):
 
 def yaml_to_energy_functions_strings(setting):
     function_strings = []
-    template_file=open('template_functions.json')
+    template_file=open('../cmgen/template_functions.json') ##To do: need to be more general.
     template_functions=json.load(template_file)
     for ene_f in setting['model']['energy_functions']:
         if ene_f['comments'] is not None:
