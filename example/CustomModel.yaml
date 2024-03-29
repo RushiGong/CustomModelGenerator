@@ -4,7 +4,7 @@ model:
     ref: reference_energy
     idmix: ideal_mixing_energy
     xsmix: excess_mixing_energy
-  basic_functions: default
+  basic_functions: ['default']
   parameters_functions:
     - parameter: v_i
       attributes: "i: v.Species"

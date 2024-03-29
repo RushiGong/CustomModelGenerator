@@ -1,4 +1,6 @@
 import yaml
+import os
+import json
 
 def custom_model(model_name, contributions, basic_functions, parameter_functions, energy_functions):
     # Create the class definition as a string
@@ -24,7 +26,7 @@ def custom_model(model_name, contributions, basic_functions, parameter_functions
 
 def yaml_to_basic_functions_strings(setting):
     function_strings = []
-    template_file=open('template_functions.json')
+    template_file=open('template_functions.json') ##To do: need to be more general.
     template_functions=json.load(template_file)
     for key in setting['model']['basic_functions']:
         if key == 'none':
@@ -65,7 +67,7 @@ def yaml_to_parameter_functions_strings(setting):
 
 def yaml_to_energy_functions_strings(setting):
     function_strings = []
-    template_file=open('template_functions.json')
+    template_file=open('template_functions.json') ##To do: need to be more general.
     template_functions=json.load(template_file)
     for ene_f in setting['model']['energy_functions']:
         if ene_f['comments'] is not None:
@@ -98,3 +100,15 @@ def process_model_information(yamlfile):
     #energy functions
     energy_function_strings=yaml_to_energy_functions_strings(setting)
     return class_name, energy_contributions_result_string, basic_function_strings, parameter_function_strings, energy_function_strings
+
+def model_generator(configuration_file, output_file, print_model=False):
+    class_name, contributions, basic_functions, parameter_functions, energy_functions = process_model_information(configuration_file)
+    dynamic_class_code = custom_model(class_name, contributions, basic_functions, parameter_functions, energy_functions)
+    if print_model == True:
+        print('Custom model template is:\n', dynamic_class_code)
+    with open(output_file, "w") as py_file:
+        f=open('./template_functions.json')
+        temps=json.load(f)
+        py_file.write(temps['imports']+'\n')
+        py_file.write(dynamic_class_code)
+

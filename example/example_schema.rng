@@ -60,10 +60,10 @@
             <element name="Parameter">
                 <attribute name="type">
                     <choice>
-                        <value>UQCG</value>
-                        <a:documentation>Gibbs energy</a:documentation>
-                        <value>UQCT</value>
-                        <a:documentation>Tau function in residual contribution of excess Gibbs energy</a:documentation>
+                        <value>NewModelV</value>
+                        <a:documentation>volume parameter</a:documentation>
+                        <value>NewModelZ</value>
+                        <a:documentation>coordination number</a:documentation>
                     </choice>
                 </attribute>
                 <interleave>

@@ -22,6 +22,7 @@ class NewModel(Model):
         target_cls = cls._dispatch_on(*args, **kwargs)
         instance = object.__new__(target_cls)
         return instance
+
     
     def __init__(self, dbe, comps, phase_name, parameters=None):
         self._dbe = dbe
@@ -112,6 +113,7 @@ class NewModel(Model):
 
         self.site_fractions = sorted([x for x in self.variables if isinstance(x, v.SiteFraction)], key=str)
         self.state_variables = sorted([x for x in self.variables if not isinstance(x, v.SiteFraction)], key=str)
+
     
     def __eq__(self, other):
         if self is other:
@@ -120,17 +122,21 @@ class NewModel(Model):
             return False
         else:
             return self.__dict__ == other.__dict__
+
     
     def __ne__(self, other):
         return not self.__eq__(other)
+
     
     def ast(self):
         "Return the full abstract syntax tree of the model."
         return Add(*list(self.models.values()))
+
     
     def variables(self):
         "Return state variables in the model."
         return sorted([x for x in self.ast.free_symbols if isinstance(x, v.StateVariable)], key=str)
+
     
     def degree_of_ordering(self):
         result = S.Zero
@@ -152,6 +158,7 @@ class NewModel(Model):
                     comp_result += site_ratios[idx] * Abs(v.SiteFraction(self.phase_name, idx, comp) - self.moles(comp)) / self.moles(comp)
             result += comp_result
         return result / sum(int(spec.number_of_atoms > 0) for spec in self.components)
+
     
     DOO = degree_of_ordering
 
@@ -175,6 +182,7 @@ class NewModel(Model):
     mixing_enthalpy = HM_MIX = property(lambda self: self.GM_MIX - v.T*self.GM_MIX.diff(v.T))
     mixing_entropy = SM_MIX = property(lambda self: -self.GM_MIX.diff(v.T))
     mixing_heat_capacity = CPM_MIX = property(lambda self: -v.T*self.GM_MIX.diff(v.T, v.T))
+
 
     
     def endmember_reference_model(self):
@@ -203,6 +211,7 @@ class NewModel(Model):
                     mod_endmember_only.models[k] = float('nan')
             self._endmember_reference_model = mod_endmember_only
         return self._endmember_reference_model
+
     
     def get_internal_constraints(self):
         constraints = []
@@ -228,6 +237,7 @@ class NewModel(Model):
                                     for spec in sublattice)
             constraints.append(total_charge)
         return constraints
+
     
     def _array_validity(self, constituent_array):
         
@@ -248,6 +258,7 @@ class NewModel(Model):
             if not (set(param_sublattice).issubset(model_sublattice) or (param_sublattice[0] == v.Species('*'))):
                 return False
         return True
+
     
     def _purity_test(self, constituent_array):
         
@@ -257,6 +268,7 @@ class NewModel(Model):
         if not self._array_validity(constituent_array):
             return False
         return not any(len(sublattice) != 1 for sublattice in constituent_array)
+
     
     def _interaction_test(self, constituent_array):
         
@@ -266,6 +278,7 @@ class NewModel(Model):
         if not self._array_validity(constituent_array):
             return False
         return any([len(sublattice) > 1 for sublattice in constituent_array])
+
     
     def _site_ratio_normalization(self):
         
@@ -279,6 +292,7 @@ class NewModel(Model):
             subl_content = sum(spec.number_of_atoms * v.SiteFraction(self.phase_name, idx, spec) for spec in active)
             site_ratio_normalization += self.site_ratios[idx] * subl_content
         return site_ratio_normalization
+
     
     def redlich_kister_sum(self, phase, param_search, param_query):
         
@@ -419,6 +433,7 @@ class NewModel(Model):
                     param_val = filtered_args[0]
             rk_terms.append(mixing_term * param_val)
         return Add(*rk_terms)
+
     
     def build_phase(self, dbe):
 
@@ -433,17 +448,35 @@ class NewModel(Model):
         self.models.clear()
         for key, value in self.__class__.contributions:
             self.models[key] = S(getattr(self, value)(dbe))
-    def v_i(self, dbe, i: v.Species):
-    	#volume parameters
+
+    def v_i(self, dbe, i, :,  , v, ., S, p, e, c, i, e, s):
+    	param_query=(
+			(where("phase_name") == self.phase_name) & \
+			(where("parameter_type") == "NewModelV") & \
+			(where("constituent_array").test(self._array_validity))
+		)
+		params = dbe._parameters.search(param_query)
+    	#volume parameter
     	return v_i
 
-    def Z(self, dbe):
-    	#coordination numbers
-    	return Z
+    def z(self, dbe):
+    	param_query=(
+			(where("phase_name") == self.phase_name) & \
+			(where("parameter_type") == "NewModelZ") & \
+			(where("constituent_array").test(self._array_validity))
+		)
+		params = dbe._parameters.search(param_query)
+    	#coordination number
+    	return z
 
-    def B_ij(self, dbe, i: v.Species, j: v.Species):
-    	#interaction parameters
-    	return B_ij
+    def b_ij(self, dbe, i: v.Species, j: v.Species):
+    	param_query=(
+			(where("phase_name") == self.phase_name) & \
+			(where("parameter_type") == "NewModelB") & \
+			(where("constituent_array").test(self._array_validity))
+		)
+		params = dbe._parameters.search(param_query)
+    	return b_ij
 
     
     def reference_energy(self, dbe):
@@ -488,7 +521,11 @@ class NewModel(Model):
         ideal_mixing_term *= (v.R * v.T)
         return ideal_mixing_term / self._site_ratio_normalization
 
+    #G=A+BT
+
+    
     def excess_mixing_energy(self, dbe):
-    	#G=Vy+Zy+By
-    	return excess_mixing_energy
+
+    	None
+		return excess_mixing_energy
 
