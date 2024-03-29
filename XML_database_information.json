@@ -1,5 +1,0 @@
-{
-    "model_name": {"NewModel": "This is the New Model"},
-    "parameters": {"UQCG": "Gibbs energy", "UQCT": "Tau function in residual contribution of excess Gibbs energy", "UQCQ": "Surface-area paramter", "UQCR": "Volume paramter", "UQCZ": "Coordination number"},
-    "parameter_options": ["Exponents", "Order"]
-}
