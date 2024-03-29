@@ -1,9 +1,0 @@
-{
-    "model_name": "NewModel",
-    "basic_functions": ["default"],
-    "energy_contributions": {"ref": "reference_energy", "idmix": "ideal_mixing_energy", "xsmix": "excess_mixing_energy"},
-    "parameters_functions": {"v_i": ["volume parameters", ["i: v.Species"]], 
-    "Z": ["coordination numbers"], 
-    "B_ij": ["interaction parameters", ["i: v.Species", "j: v.Species"]]},
-    "energy_functions":{"reference_energy": "CEF-default", "ideal_mixing_energy": "CEF-default", "excess_mixing_energy": "G=Vy+Zy+By"}
-}
