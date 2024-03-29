@@ -56,8 +56,30 @@ The ```energy_contributions``` keyword is intended to define what contributions 
 ```key``` could be the short name and ```value``` is the full name for the ```energy_function```
 
 ### basic_functions
-Define some functions you would like to extract from existing models in pycalphad to use in the custom model.
+Define some functions you would like to extract from existing models in pycalphad to use in the custom model. See **[`template_functions.json`](./template_functions.json)** for all available functions.
 
 *type:* list<br>
-*default:* The minimum functions should be loaded from  **[`template_functions.json`](./template_functions.json)**
+*default:* The minimum functions should be loaded from  **[`template_functions.json`](./template_functions.json)**.
 
+### parameters_functions
+The ```parameters_functions``` is intended to define the functions for new parameters in the thermodynamic model, you could provide information including parameter name, attributes, corresponding keyword defined in the database, and other comments for the parameter. 
+
+#### parameter
+Define the name of the new parameter.
+
+*type:* string
+
+#### attributes
+Define the attributes of the parameter, such as this parameter is related to component i.
+
+*type:* string
+
+#### database_keyword
+Match the parameter with the keyword defined in the database. 
+
+*type:* string
+
+#### comments
+Additional information for the parameter.
+
+*type:* string
