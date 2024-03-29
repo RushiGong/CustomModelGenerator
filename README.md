@@ -2,6 +2,8 @@
 
 This **template generator** can help you create the templates to implement your custom thermodynamic model into [pycalphad](https://pycalphad.org/docs/latest/).
 
+![Custom Model Template Generator Schematic](assets/CMG.png)
+
 ## Quick start
 Use the **[`Custom_Model_Database_Generator.ipynb`](./example/Custom_Model_Template_Generator.ipynb)** to create an **XML schema template** for defining the thermodynamic database for your custom model and a **PyCalphad-style model template** for expressing your custom model in PyCalphad.
 
