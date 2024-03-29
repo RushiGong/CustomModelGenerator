@@ -126,3 +126,11 @@ def save_rng_schema(schema_tree, filename):
     etree.indent(schema_tree, space="    ")
     with open(filename, "wb") as f:
         f.write(etree.tostring(schema_tree, encoding='utf-8', xml_declaration=True, pretty_print=True))
+
+def database_generator(configuration_file, output_file, print_schema=False):
+    Model_name, Parameters, Options=yaml_to_rng_input_strings(configuration_file)
+    schema_tree = generate_rng_schema(Model_name, Parameters, Options=Options)
+    if print_schema == True:
+        print('XML schema for custom model:\n', schema_tree)
+    save_rng_schema(schema_tree, output_file)
+
