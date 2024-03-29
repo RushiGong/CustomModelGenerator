@@ -1,6 +1,6 @@
 # CustomModelGenerator
 
-This **template generator** can help you create the templates to implement your custom model into [pycalphad](https://pycalphad.org/docs/latest/).
+This **template generator** can help you create the templates to implement your custom thermodynamic model into [pycalphad](https://pycalphad.org/docs/latest/).
 
 ## How to start
 1. Use the **[`Custom_Model_Database_Generator.ipynb`](./Custom_Model_Database_Generator.ipynb)** to create an  XML schema template for defining the thermodynamic database for your custom model.
@@ -43,17 +43,17 @@ All of the possible keys are
 ```
 
 ## model
-The ```model``` key is intended to define the thermodynamic model you want to implement
+The ```model``` key is intended to define the custom model you want to implement.
 ### name
-The name of the thermodynamic model.
+The name of the custom model.
 
 *type:* string
 
 ### energy_contributions
-The ```energy_contributions``` keyword is intended to define what contributions to Gibbs energy are considered in the thermodynamic model
+The ```energy_contributions``` keyword is intended to define what contributions to Gibbs energy are considered in the custom model.
 
 *type:* ```key:value``` pair<br>
-```key``` could be the short name and ```value``` is the full name for the ```energy_function```
+```key``` could be the short name and ```value``` is the full name for the ```energy_function```.
 
 ### basic_functions
 Define some functions you would like to extract from existing models in pycalphad to use in the custom model. See **[`template_functions.json`](./template_functions.json)** for all available functions.
@@ -62,7 +62,7 @@ Define some functions you would like to extract from existing models in pycalpha
 *default:* The minimum functions should be loaded from  **[`template_functions.json`](./template_functions.json)**.
 
 ### parameters_functions
-The ```parameters_functions``` is intended to define the functions for new parameters in the thermodynamic model, you could provide information including parameter name, attributes, corresponding keyword defined in the database, and other comments for the parameter. 
+The ```parameters_functions``` is intended to define the functions for new parameters in the custom model, you could provide information including parameter name, attributes, corresponding keyword defined in the database, and other comments for the parameter. 
 
 #### parameter
 Define the name of the new parameter.
@@ -81,5 +81,46 @@ Match the parameter with the keyword defined in the database.
 
 #### comments
 Additional information for the parameter.
+
+*type:* string
+
+### energy_functions
+The ```energy_functions``` is intended to define the functions for energy contributions in the custom model, you could provide information including function name, function expression, and other comments.
+
+#### energy
+The ```energy``` keyword is corresponding with the ```value``` you defined in ```energy_contributions```, representing the full name for the ```energy_function```.
+
+*type:* string
+
+#### function
+Enter the expression of energy function using this keyword. If ```CEF-default``` is used here, the same energy functions in the CEF model will be applied here. 
+
+*type:* string
+
+#### comments
+Additional information for the energy function.
+
+*type:* string
+
+## database
+The ```database``` key is intended to define the XML database schema you want to define for the custom model. 
+### name
+The name of the custom model. The same as the ```name``` value under the ```model``` key.
+
+*type:* string
+
+### description
+Provide any comments or descriptions about your custom model, such as the full name of the model.
+
+*type:* string
+
+### parameters
+Define the name of new parameters in the custom model. It is corresponding with the ```database_keyword``` value under ```model: parameters_functions``` key.
+
+*type:* ```key:value``` pair<br>
+```key``` could be the short name of the parameters and ```value``` is the full name or other comments for the parameters.
+
+### options
+Define some optional schema for parameter structures. Options include ```Exponent``` and ```Order```.
 
 *type:* string
