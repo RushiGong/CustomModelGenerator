@@ -57,7 +57,7 @@ The ```energy_contributions``` keyword is intended to define what contributions 
 ```key``` could be the short name and ```value``` is the full name for the ```energy_function```.
 
 ### basic_functions
-Define some functions you would like to extract from existing models in pycalphad to use in the custom model. See **[`template_functions.json`](./cmgen/template_functions.json)** for all available functions.
+Define some functions you would like to extract from existing models in pycalphad to use in the custom model. See **[`template_functions.json`](./cmgen/template_functions/template_functions.json)** for all available functions.
 
 *type:* list<br>
 *default:* The minimum functions should be loaded from  **[`template_functions.json`](./cmgen/template_functions/template_functions.json)**.
