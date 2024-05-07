@@ -1,0 +1,25 @@
+{
+    "image": "mcr.microsoft.com/devcontainers/miniconda",
+    "customizations": {
+      "codespaces": {
+        "openFiles": [
+          "README.md"
+        ]
+      },
+      "vscode": {
+        "extensions": [
+          "wijmo.gc-excelviewer",
+          "mechatroner.vscode_rainbow_csv",
+          "ms-python.python",
+          "ms-toolsai.jupyter",
+          "hansvn.instant-mongo"
+        ]
+      }
+    },
+    "hostRequirements": {
+       "cpus": 4,
+       "memory": "16gb",
+       "storage": "16gb"
+    },
+    "onCreateCommand": "conda install -y python=3.9.13 jupyter numpy && pip install yaml json lxml"
+}
