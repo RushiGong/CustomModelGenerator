@@ -1,0 +1,64 @@
+model:
+  name: PRModel
+  energy_contributions:
+    ref: reference_energy
+    idmix: ideal_mixing_energy
+    xsmix: excess_mixing_energy
+  basic_functions: ['default']
+  parameters_functions:
+    - parameter: a_i
+      attributes: 
+        - "i: v.Species"
+      database_keyword: PRMA
+      comments: Peng-Robinson temperature-dependent attraction term
+    - parameter: b_i
+      attributes: 
+        - "i: v.Species"
+      database_keyword: PRMB
+      comments: Peng-Robinson temperature-dependent repulson term
+    - parameter: a_ij
+      attributes:
+        - "i: v.Species"
+        - "j: v.Species"
+      database_keyword: null
+      comments: (a_i*a_j)^0.5(1-k_ij)
+    - parameter: a_m
+      attributes: null
+      database_keyword: null
+      comments: sum(x_i*x_j*a_ij)
+    - parameter: b_m
+      attributes: null
+      database_keyword: null
+      comments: sum(x_i*b_i)
+    - parameter: A_s
+      attributes: null
+      database_keyword: null
+      comments: (a_m*P)/(R^2*T^2)
+    - parameter: B_s
+      attributes: null
+      database_keyword: null
+      comments: (b_m*P)/(R*T)
+    - parameter: Z
+      attributes: null
+      database_keyword: null
+      comments: solve from A_s and B_s
+  energy_functions:
+    - energy: reference_energy
+      function: CEF-default
+      comments: null
+    - energy: ideal_mixing_energy
+      function: CEF-default
+      comments: null
+    - energy: excess_mixing_energy
+      function: null
+      comments: fugacity
+
+database:
+  name: PRModel
+  description: Peng-Robinson model
+  parameters:
+    PRMA: Peng-Robinson temperature-dependent attraction term
+    PRMB: Peng-Robinson temperature-dependent repulson term
+    PRMK: Peng-Robinson interaction parameter
+  options:
+   - Exponents
