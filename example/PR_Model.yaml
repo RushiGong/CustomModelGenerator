@@ -15,7 +15,7 @@ model:
       attributes: 
         - "i: v.Species"
       database_keyword: PRMB
-      comments: Peng-Robinson temperature-dependent repulson term
+      comments: Peng-Robinson temperature-independent repulsion term
     - parameter: a_ij
       attributes:
         - "i: v.Species"
@@ -58,7 +58,7 @@ database:
   description: Peng-Robinson model
   parameters:
     PRMA: Peng-Robinson temperature-dependent attraction term
-    PRMB: Peng-Robinson temperature-dependent repulson term
+    PRMB: Peng-Robinson temperature-independent repulsion term
     PRMK: Peng-Robinson interaction parameter
   options:
    - Exponents
