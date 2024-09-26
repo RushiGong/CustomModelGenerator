@@ -1,0 +1,89 @@
+<?xml version='1.0' encoding='utf-8'?>
+<grammar xmlns="http://relaxng.org/ns/structure/1.0" xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0" datatypeLibrary="http://www.w3.org/2001/XMLSchema-datatypes">
+    <include href="core.rng"/>
+    <define name="PRModelConstituentArray">
+        <element name="ConstituentArray">
+            <oneOrMore>
+                <element name="Site">
+                    <optional>
+                        <attribute name="id">
+                            <data type="integer"/>
+                        </attribute>
+                    </optional>
+                    <optional>
+                        <attribute name="ratio">
+                            <data type="double"/>
+                        </attribute>
+                    </optional>
+                    <optional>
+                        <attribute name="refid">
+                            <data type="integer"/>
+                        </attribute>
+                    </optional>
+                    <oneOrMore>
+                        <element name="Constituent">
+                            <attribute name="refid">
+                                <data type="string"/>
+                            </attribute>
+                        </element>
+                    </oneOrMore>
+                </element>
+            </oneOrMore>
+        </element>
+    </define>
+    <define name="PRModel.model" combine="choice">
+        <element name="Model">
+            <attribute name="type">
+                <a:documentation>Peng-Robinson model</a:documentation>
+                <value>PRModel</value>
+            </attribute>
+            <interleave>
+                <ref name="PRModelConstituentArray"/>
+                <optional>
+                    <element name="ChemicalGroups">
+                        <a:documentation>Mapping of species to integer chemical groups. Equal integers mean the species belong to the same group.</a:documentation>
+                        <oneOrMore>
+                            <element name="Constituent">
+                                <attribute name="groupid">
+                                    <data type="integer"/>
+                                </attribute>
+                                <attribute name="refid">
+                                    <data type="string"/>
+                                </attribute>
+                            </element>
+                        </oneOrMore>
+                    </element>
+                </optional>
+            </interleave>
+        </element>
+        <zeroOrMore>
+            <element name="Parameter">
+                <attribute name="type">
+                    <choice>
+                        <value>PRMA</value>
+                        <a:documentation>Peng-Robinson temperature-dependent attraction term</a:documentation>
+                        <value>PRMB</value>
+                        <a:documentation>Peng-Robinson temperature-dependent repulson term</a:documentation>
+                        <value>PRMK</value>
+                        <a:documentation>Peng-Robinson interaction parameter</a:documentation>
+                    </choice>
+                </attribute>
+                <interleave>
+                    <optional>
+                        <text/>
+                    </optional>
+                    <zeroOrMore>
+                        <ref name="Interval"/>
+                    </zeroOrMore>
+                    <ref name="PRModelConstituentArray"/>
+                    <optional>
+                        <element name="Exponents">
+                            <!--Please finalize details of this optional adding.-->
+                        </element>
+                    </optional>
+                </interleave>
+            </element>
+        </zeroOrMore>
+    </define>
+    <!--Please modify database.rng and parser.py in pycalphad-xml-->
+</grammar>
